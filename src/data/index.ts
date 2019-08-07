@@ -1,1 +1,1 @@
-export { UserStore, IUserStore } from './UserStore'
+export * from './UserStore';

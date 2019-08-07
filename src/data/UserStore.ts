@@ -1,25 +1,31 @@
 import {User, IUser} from '@entities';
 import {find} from 'lodash';
 
+const userStoreData: [User?] = []
+
 export interface IUserStore {
-  users: [User?];
-  addUser: (user: IUser) => void;
+  print: () => void;
+  add: (user: IUser) => void;
   doesUserExist: (user: IUser) => boolean;
+  doesIdExist: (id: number) => boolean;
 }
 
-export class UserStore implements IUserStore {
-  public users : [User?];
+export const UserStore = {
+  print() {
+    console.log(userStoreData);
+  },
 
-  constructor() {
-    this.users = []
-  }
+  add(user: IUser) {
+    userStoreData.push(new User(user.email, user.password, user.phone));
+  },
 
-  public addUser(user: IUser) {
-    this.users.push(new User(user.email, user.password, user.phone));
-  }
-
-  public doesUserExist(user: IUser) {
-    let match = find(this.users, (u: User) => u.email === user.email);
+  doesUserExist(user: IUser): boolean {
+    const match = find(userStoreData, (u: User) => u.email === user.email);
     return !!match;
-  }
-}
+  },
+
+  doesIdExist(id: number): boolean {
+    const match = find(userStoreData, (u: User) => u.id === id );
+    return !!match;
+  },
+};

@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', BaseRouter);
 
 app.get('*', (req: Request, res: Response) => {
-    res.status(NOT_FOUND).json({error: "Route not found"});
+    res.status(NOT_FOUND).json({error: 'Route not found'});
 });
 
 export default app;
