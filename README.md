@@ -1,2 +1,2 @@
 # ns8-test
-Small, RESTful API test in typescript and koa.
+Small, RESTful API test in typescript and express.
