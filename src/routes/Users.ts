@@ -5,17 +5,14 @@ import { UserStore } from '@data';
 import { User } from '@entities';
 
 const userStore: UserStore = new UserStore();
-
-// Init shared
-const router = Router();
-// const userDao = new UserDao();
+const router: Router = Router();
 
 router.post('/add', async (req: Request, res: Response) => {
     try {
         const { user } = req.body;
         //validate obj
         userStore.addUser(user)
-        console.log("USERS", userStore);
+        console.log('USERS', userStore);
         return res.status(CREATED).end();
     } catch (err) {
         console.error(err.message, err);

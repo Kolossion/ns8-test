@@ -47,3 +47,5 @@ The data is handled by simple JSON objects within the code. This was used due to
 8) Are unit tests required? I assumed not.
 
 9) In the event that a user is attempting to be added that already exists, is that an upsert or an ignore? I assumed the latter, since I'd imagine there'd rather be an explicit update to user data. Also, in the event of the ignore, would that be considered a bad request? I said no to avoid an error, but utilized a different response code than when it's actually added.
+
+10) Should the event search function check for the existence of a user ID before searching for events in the store? Currently with my setup it's not possible (though in a SQL or similar database it would be relatively easy), so I just had it return empty when it was an ID that didn't exist.
