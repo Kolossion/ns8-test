@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { BAD_REQUEST, CREATED, OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
+import { BAD_REQUEST, CREATED, NOT_MODIFIED, OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
 import { paramMissingError } from '@shared';
 import { UserStore } from '@data';
 import { User } from '@entities';
@@ -11,9 +11,13 @@ router.post('/add', async (req: Request, res: Response) => {
     try {
         const { user } = req.body;
         //validate obj
-        userStore.addUser(user)
-        console.log('USERS', userStore);
-        return res.status(CREATED).end();
+        if (userStore.doesUserExist(user)) {
+            return res.status(NOT_MODIFIED).end();
+        } else {
+            userStore.addUser(user)
+            console.log('USERS', userStore);
+            return res.status(CREATED).end();
+        }
     } catch (err) {
         console.error(err.message, err);
         return res.status(BAD_REQUEST).json({
