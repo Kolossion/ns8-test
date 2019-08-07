@@ -27,7 +27,7 @@ Either way, the application will open at either port 3000 or the port provided i
 ## Utilized Technologies
 This project utilizes express and typescript, the boilerplate of which was partially provided by `express-generator-typescript`. A good chunk of that code was unnecessary, and thus removed from the project (such as public asset folders and delivering HTML pages).
 
-The data is handled by a very simple JSON object within the code. This was used due to the availability of libraries (e.g. lodash) that can search through JSON objects relatively easily, as well as to avoid spending a whole bunch of time figuring out and setting up true mock data systems. If this were a true production application, that time would naturally be spent to allow developers freedom to mock data while not getting in the way of plugging the application into a database.
+The data is handled by simple JSON objects within the code. This was used due to the availability of libraries (e.g. lodash) that can search through JSON objects relatively easily, as well as to avoid spending a whole bunch of time figuring out and setting up true mock data systems. If this were a true production application, that time would naturally be spent to allow developers freedom to mock data while not getting in the way of plugging the application into a database. I initially spent a good chunk of time trying to get clever with the JSON data structure and dependency injection, but I was going in circles, so I went with the simple method utilized in the code.
 
 ## Assumptions, Next Steps, Thoughts, and Further Questions
 1) I did not implement authorization to avoid falling down that rabbit hole, but it's definitely something this API would need. Along that same line, user account security would need improvement, considering it's storing the passwords as plaintext.
@@ -43,3 +43,7 @@ The data is handled by a very simple JSON object within the code. This was used 
 6) To continue off point #2, having this be a stateless API allows for much easier scaling, since each instance wouldn't be holding its own state.
 
 7) Considering that the application's data store is just a JSON object, the data storage is handled synchronously. If it were being handled by a true DB, it'd be best to make those calls asynchronous to avoid blocking.
+
+8) Are unit tests required? I assumed not.
+
+9) In the event that a user is attempting to be added that already exists, is that an upsert or an ignore? I assumed the latter, since I'd imagine there'd rather be an explicit update to user data. Also, in the event of the ignore, would that be considered a bad request? I said no to avoid an error, but utilized a different response code than when it's actually added.

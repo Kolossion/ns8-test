@@ -1,23 +1,25 @@
 
+import v4 from 'uuid';
+
 export interface IUser {
     id?: number;
-    name: string;
     email: string;
+    password: string;
+    phone?: string;
 }
 
+let curId: number = 0;
+
 export class User implements IUser {
-
     public id?: number;
-    public name: string;
     public email: string;
+    public password: string;
+    public phone?: string;
 
-    constructor(nameOrUser: string | IUser, email?: string) {
-        if (typeof nameOrUser === 'string') {
-            this.name = nameOrUser;
-            this.email = email || '';
-        } else {
-            this.name = nameOrUser.name;
-            this.email = nameOrUser.email;
-        }
+    constructor(email: string, password: string, phone?: string) {
+        this.id = ++curId;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
     }
 }
