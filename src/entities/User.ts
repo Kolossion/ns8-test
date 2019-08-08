@@ -16,7 +16,6 @@ export interface IUser {
     phone?: string;
 }
 
-// NOTE: Fix the typing on this function return
 export function UserValidator(user: IUser): void {
     Joi.assert(user, userSchema);
 }

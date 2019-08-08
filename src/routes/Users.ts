@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { BAD_REQUEST, CREATED, NOT_MODIFIED, OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
+import { BAD_REQUEST, CREATED, NOT_MODIFIED } from 'http-status-codes';
 import { User, UserValidator } from '@entities';
 import { UserStore } from '@data';
 

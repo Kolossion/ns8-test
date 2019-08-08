@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import BaseRouter from './routes';
 import {NOT_FOUND} from 'http-status-codes';
 

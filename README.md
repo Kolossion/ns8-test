@@ -21,6 +21,7 @@ Either way, the application will open at either port 3000 or the port provided i
 
 ### `POST /users/add`
 Adds a user to the system. Assigns an ID on create. Checks to see if email already exists, and rejects creation if it does.
+
 Request body structure:
 ```
 {
@@ -34,6 +35,7 @@ Request body structure:
 
 ### `POST /events/add`
 Adds an event assigned to a user to the system. Will fail if attempting to assign an event to a non-existent user.
+
 Request body structure:
 ```
 {
@@ -45,7 +47,7 @@ Request body structure:
 ```
 
 ### `GET /events/user/:id`
-Returns events assigned to the provided user ID. Returns an empty list if ID doesn't have any events.
+Returns events assigned to the provided user ID. Returns an empty list if ID doesn't have any events or doesn't exist.
 
 ### `GET /events/today`
 Returns the events created in the last 24 hours. No parameters.
@@ -68,11 +70,11 @@ The data is handled by simple JSON objects within the code. This was used due to
 
 5) Would this API want to be cached? Some more discovery would be needed to make sure caching could be easily implemented into this API.
 
-6) To continue off point #2, having this be a stateless API allows for much easier scaling, since each instance wouldn't be holding its own state, granted right now each instance _is_ handling its own state due to the JSON data stores, but I assumed this wouldn't be run in a cluster.
+6) To continue off point #2, having this be a stateless API allows for much easier scaling, since each instance wouldn't be holding its own state, granted right now each instance _is_ handling its own state due to the JSON data stores, but I assumed this wouldn't be run in a cluster since - and I'm metagaming a bit here - it's a dev test.
 
 7) Considering that the application's data store is just JSON objects, the data storage is handled synchronously. If it were being handled by a true DB, it'd be best to make those calls asynchronous to avoid blocking.
 
-8) Are unit tests required? I assumed not.
+8) Are unit tests required? I assumed not. For production, it would make sense to have them.
 
 9) In the event that a user is attempting to be added that already exists, is that an upsert or an ignore? I assumed the latter, since I'd imagine there'd rather be an explicit update to user data. Also, in the event of the ignore, would that be considered a bad request? I said no to avoid an error, but utilized a different response code than when it's actually added.
 

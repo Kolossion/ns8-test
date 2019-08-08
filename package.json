@@ -6,7 +6,6 @@
     "lint": "tslint --project \"tsconfig.json\"",
     "start": "cross-env ENV_FILE=production node -r ./env -r module-alias/register dist/Start.js",
     "start-dev": "nodemon --config \"./util/nodemon.json\"",
-    "test": "nodemon --config \"./util/nodemon.test.json\""
   },
   "_moduleAliases": {
     "@entities": "dist/entities",

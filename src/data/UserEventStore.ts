@@ -16,7 +16,6 @@ export const UserEventStore: IUserEventStore = {
   },
 
   add(event: IUserEvent): UserEvent {
-    // userEventStoreData.push(new UserEvent(event.type, event.userId));
     const newEvent = new UserEvent(event.type, event.userId);
     userEventStoreData.push(newEvent);
     return newEvent;

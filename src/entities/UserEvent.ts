@@ -4,7 +4,6 @@ import { AnySchema } from 'joi';
 const Joi = require('@hapi/joi');
 import v4 from 'uuid';
 import moment from 'moment';
-// let curId: number = 0;
 
 const userEventSchema: AnySchema = Joi.object().keys({
     type: Joi.string().required(),
@@ -18,7 +17,6 @@ export interface IUserEvent {
     date?: number;
 }
 
-// NOTE: Fix the typing on this function return
 export function UserEventValidator(event: IUserEvent): void {
     Joi.assert(event, userEventSchema);
 }
