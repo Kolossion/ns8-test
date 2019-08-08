@@ -12,7 +12,6 @@ router.post('/add', async (req: Request, res: Response) => {
         UserEventValidator(event);
         if (UserStore.doesIdExist(event.userId)) {
           const newEvent: UserEvent = UserEventStore.add(event);
-          UserEventStore.print();
           return res.status(CREATED).json({
               created: {
                   ...newEvent,
@@ -54,7 +53,19 @@ router.get('/user/:id', async (req: Request, res: Response) => {
         error: err.message,
     });
   }
+});
 
-})
+router.get('/today', async (req: Request, res: Response) => {
+  try {
+    const events = UserEventStore.getInLastDay();
+    return res.status(OK).json({
+      events,
+    });
+  } catch (err) {
+    return res.status(BAD_REQUEST).json({
+        error: err.message,
+    });
+  }
+});
 
 export default router;

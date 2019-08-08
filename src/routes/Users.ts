@@ -13,7 +13,6 @@ router.post('/add', async (req: Request, res: Response) => {
             return res.status(NOT_MODIFIED).end();
         } else {
             const newUser: User = UserStore.add(user);
-            UserStore.print();
             return res.status(CREATED).json({
                 created: {
                     ...newUser,

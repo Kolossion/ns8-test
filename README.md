@@ -20,7 +20,29 @@ Either way, the application will open at either port 3000 or the port provided i
 ## Endpoints
 
 ### `POST /users/add`
+Adds a user to the system. Assigns an ID on create. Checks to see if email already exists, and rejects creation if it does.
+Request body structure:
+```
+{
+  "user": {
+    "email": <string:email>,
+    "password": <string>,
+    "phone": <Optional(string)>
+  }
+}
+```
+
 ### `POST /events/add`
+Adds an event assigned to a user to the system. Will fail if attempting to assign an event to a non-existent user.
+Request body structure:
+```
+{
+  "event": {
+    "type": <string>,
+    "userId": <number>
+  }
+}
+```
 
 ### `GET /events/user/:id`
 Returns events assigned to the provided user ID. Returns an empty list if ID doesn't have any events.

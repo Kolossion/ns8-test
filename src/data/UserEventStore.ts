@@ -1,6 +1,4 @@
-// import {User, IUser} from '@entities';
 import {UserEvent, IUserEvent} from '@entities';
-import {filter} from 'lodash';
 import moment from 'moment';
 
 const userEventStoreData: [UserEvent?] = [];
@@ -35,7 +33,7 @@ export const UserEventStore: IUserEventStore = {
     const yesterday = moment().subtract(24, 'hours');
     return userEventStoreData.filter( (e) => {
       if (e && e.date) {
-        return moment(e.date).isBetween(now, yesterday);
+        return moment(e.date).isBetween(yesterday, now);
       }
       return false;
     })
