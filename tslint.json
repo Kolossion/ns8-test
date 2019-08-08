@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "triple-equals": false,
     "no-console": false,
     "member-ordering": false,
     "object-literal-sort-keys": false,

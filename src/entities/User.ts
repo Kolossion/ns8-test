@@ -1,8 +1,9 @@
-import Joi, { AnySchema, ValidationResult } from 'joi';
+import { AnySchema } from 'joi';
+const Joi = require('@hapi/joi');
 let curId: number = 0;
 
 const userSchema: AnySchema = Joi.object().keys({
-    email: Joi.string().email({minDomainAtoms: 2}).required(),
+    email: Joi.string().email({minDomainSegments: 2}).required(),
     password: Joi.string().required(),
     id: Joi.number(),
     phone: Joi.string().regex(/[0-9]{3}-[0-9]{3}-[0-9]{4}/i),

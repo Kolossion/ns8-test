@@ -12,9 +12,13 @@ router.post('/add', async (req: Request, res: Response) => {
         if (UserStore.doesUserExist(user)) {
             return res.status(NOT_MODIFIED).end();
         } else {
-            UserStore.add(user);
+            const newUser: User = UserStore.add(user);
             UserStore.print();
-            return res.status(CREATED).end();
+            return res.status(CREATED).json({
+                created: {
+                    ...newUser,
+                }
+            });
         }
     } catch (err) {
         if (err.name === 'ValidationError') {

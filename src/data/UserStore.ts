@@ -5,18 +5,20 @@ const userStoreData: [User?] = []
 
 export interface IUserStore {
   print: () => void;
-  add: (user: IUser) => void;
+  add: (user: IUser) => User;
   doesUserExist: (user: IUser) => boolean;
   doesIdExist: (id: number) => boolean;
 }
 
 export const UserStore = {
-  print() {
+  print(): void {
     console.log(userStoreData);
   },
 
-  add(user: IUser) {
-    userStoreData.push(new User(user.email, user.password, user.phone));
+  add(user: IUser): User {
+    const newUser = new User(user.email, user.password, user.phone);
+    userStoreData.push(newUser);
+    return newUser;
   },
 
   doesUserExist(user: IUser): boolean {

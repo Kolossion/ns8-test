@@ -21,8 +21,12 @@ Either way, the application will open at either port 3000 or the port provided i
 
 ### `POST /users/add`
 ### `POST /events/add`
-### `GET /events/all`
-### `GET /events/search`
+
+### `GET /events/user/:id`
+Returns events assigned to the provided user ID. Returns an empty list if ID doesn't have any events.
+
+### `GET /events/today`
+Returns the events created in the last 24 hours. No parameters.
 
 ## Utilized Technologies
 This project utilizes express and typescript, the boilerplate of which was partially provided by `express-generator-typescript`. A good chunk of that code was unnecessary, and thus removed from the project (such as public asset folders and delivering HTML pages).
@@ -40,7 +44,7 @@ The data is handled by simple JSON objects within the code. This was used due to
 
 4) I'm never 100% sure on the organization of an application, and thus would want to take a step back and see if there'd be a better way to organize the code than I have done here.
 
-5) Would this API want to be cached? If so, the `/events/search` endpoint would need to be changed. As it stands, since it utilizes a JSON request body, I don't believe can't reliably be cached. So, a change to a schema like `/events/user/:id`, `/events/date/:date` would allow those routes to be cached more easily. This is not an area I have much experience with first-hand, so further research would be necessary.
+5) Would this API want to be cached? Some more discovery would be needed to make sure caching could be easily implemented into this API.
 
 6) To continue off point #2, having this be a stateless API allows for much easier scaling, since each instance wouldn't be holding its own state, granted right now each instance _is_ handling its own state due to the JSON data stores, but I assumed this wouldn't be run in a cluster.
 
@@ -50,4 +54,4 @@ The data is handled by simple JSON objects within the code. This was used due to
 
 9) In the event that a user is attempting to be added that already exists, is that an upsert or an ignore? I assumed the latter, since I'd imagine there'd rather be an explicit update to user data. Also, in the event of the ignore, would that be considered a bad request? I said no to avoid an error, but utilized a different response code than when it's actually added.
 
-10) Should the event search function check for the existence of a user ID before searching for events in the store? Currently with my setup it's not possible (though in a SQL or similar database it would be relatively easy), so I just had it return empty when it was an ID that didn't exist.
+10) A good amount of the error handling could be abstracted to avoid repetition.
